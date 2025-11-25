@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvyp644lngrf7"]
+
+[ext_resource type="Script" path="res://scripts/api/wiremock/client.gd" id="1_41pr4"]
+[ext_resource type="Script" path="res://scenes/screens/mapping_list_screen.gd" id="1_ce8r7"]
+
+[node name="MappingListScreen" type="Node2D"]
+script = ExtResource("1_ce8r7")
+
+[node name="WiremockClient" type="Node" parent="." node_paths=PackedStringArray("http_request")]
+script = ExtResource("1_41pr4")
+base_url = "https://aoa-api-dev.obdclients.com/ms-mock/wiremock"
+http_request = NodePath("HTTPRequest")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="WiremockClient"]

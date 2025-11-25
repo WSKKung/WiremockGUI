@@ -1,0 +1,157 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbpt0062l50ce"]
+
+[ext_resource type="Script" path="res://scenes/components/mapping_response_detail.gd" id="1_fro8u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5joaf"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_f6chw"]
+font_color = Color(1, 0, 0, 1)
+
+[node name="MappingResponseDetail" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fro8u")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "Response"
+label_settings = SubResource("LabelSettings_5joaf")
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+
+[node name="Fixed" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Fixed"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Fixed/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Fixed/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Status"
+
+[node name="StatusEdit" type="SpinBox" parent="MarginContainer/VBoxContainer/TabContainer/Fixed/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+max_value = 999.0
+value = 200.0
+rounded = true
+
+[node name="HBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Fixed/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Fixed/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Body"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Fixed/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="BodyTypeOption" type="OptionButton" parent="MarginContainer/VBoxContainer/TabContainer/Fixed/VBoxContainer/HBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Text"
+popup/item_1/text = "JSON"
+popup/item_1/id = 1
+popup/item_2/text = "Base 64"
+popup/item_2/id = 2
+
+[node name="FomatBodyButton" type="Button" parent="MarginContainer/VBoxContainer/TabContainer/Fixed/VBoxContainer/HBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Format"
+
+[node name="BodyErrorLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Fixed/VBoxContainer/HBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+label_settings = SubResource("LabelSettings_f6chw")
+
+[node name="BodyEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/TabContainer/Fixed/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Proxy" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Proxy"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Proxy/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Proxy/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Base URL"
+
+[node name="ProxyBaseUrlEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/TabContainer/Proxy/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Proxy/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Proxy/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Trim Prefix"
+
+[node name="ProxyTrimPrefixEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/TabContainer/Proxy/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+placeholder_text = "(no prefix)"
+expand_to_text_length = true
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Delay"
+
+[node name="DelayEdit" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1e+08
+rounded = true
+suffix = "ms"
+
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/Fixed/VBoxContainer/HBoxContainer2/HBoxContainer/BodyTypeOption" to="." method="_on_body_type_option_item_selected"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/TabContainer/Fixed/VBoxContainer/HBoxContainer2/HBoxContainer/FomatBodyButton" to="." method="_on_fomat_body_button_pressed"]
+[connection signal="text_changed" from="MarginContainer/VBoxContainer/TabContainer/Fixed/VBoxContainer/HBoxContainer2/BodyEdit" to="." method="_on_name_edit_text_changed"]

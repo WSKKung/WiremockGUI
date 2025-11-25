@@ -1,0 +1,103 @@
+[gd_scene load_steps=6 format=3 uid="uid://b75d21hedx4ps"]
+
+[ext_resource type="Script" path="res://scenes/components/mapping_list_item.gd" id="1_18qnj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sio36"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pyjsw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fp6cr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wkiiu"]
+
+[node name="MappingListItem" type="PanelContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 43.0
+grow_horizontal = 2
+script = ExtResource("1_18qnj")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MarginContainer4" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_sio36")
+
+[node name="PriorityLabel" type="Label" parent="MarginContainer/HBoxContainer/MarginContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Priority"
+text_overrun_behavior = 1
+
+[node name="MarginContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_pyjsw")
+
+[node name="NameLabel" type="Label" parent="MarginContainer/HBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Mapping Name"
+text_overrun_behavior = 3
+
+[node name="MarginContainer2" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_fp6cr")
+
+[node name="MethodLabel" type="Label" parent="MarginContainer/HBoxContainer/MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Method"
+text_overrun_behavior = 1
+
+[node name="MarginContainer3" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_wkiiu")
+
+[node name="PathLabel" type="Label" parent="MarginContainer/HBoxContainer/MarginContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Path"
+text_overrun_behavior = 1
+
+[node name="MarginContainer5" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_wkiiu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer5"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="EditButton" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer5/HBoxContainer"]
+layout_mode = 2
+text = "Edit"
+
+[node name="CloneButton" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer5/HBoxContainer"]
+layout_mode = 2
+text = "Clone"
+
+[node name="RemoveButton" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer5/HBoxContainer"]
+layout_mode = 2
+text = "Remove"
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/MarginContainer5/HBoxContainer/EditButton" to="." method="_on_edit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/MarginContainer5/HBoxContainer/CloneButton" to="." method="_on_clone_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/MarginContainer5/HBoxContainer/RemoveButton" to="." method="_on_remove_button_pressed"]
