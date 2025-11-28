@@ -33,8 +33,8 @@ func _on_add_server_button_pressed():
 
 func _on_server_list_item_view_requested(server: MockServer):
 	var screen = scene_mapping_list_screen.instantiate()
-	SceneManager.change_scene_to_node(screen)
 	WiremockClient.set_base_url(server.url)
+	SceneManager.change_scene_to_node(screen)
 
 func _on_server_list_item_edit_requested(server: MockServer):
 	var screen = scene_server_detail_screen.instantiate() as ServerDetailScreen

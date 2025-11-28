@@ -5,9 +5,6 @@ extends Node
 var http_request: HTTPRequest
 
 func _ready():
-	if base_url == "":
-		base_url = "https://aoa-api-dev.obdclients.com/ms-mock/wiremock"
-	
 	# setup http request for sending request to wiremock
 	http_request = HTTPRequest.new()
 	add_child(http_request)
