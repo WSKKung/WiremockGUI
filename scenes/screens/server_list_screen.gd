@@ -22,7 +22,9 @@ func fetch_server_list():
 			server_list_item.view_requested.connect(_on_server_list_item_view_requested.bind(server))
 			server_list_item.edit_requested.connect(_on_server_list_item_edit_requested.bind(server))
 			server_list_item.remove_requested.connect(_on_server_list_item_remove_requested.bind(server))
-
+	elif ctx.is_error():
+		ToastManager.show_toast("Failed to load server list data")
+	
 func _on_add_server_button_pressed():
 	var server = MockServer.new()
 	server.name = "New Server"

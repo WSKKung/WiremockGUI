@@ -28,6 +28,8 @@ func fetch_list_mapping() -> void:
 	list_mapping_response = await WiremockClient.list_mapping(ctx)
 	if ctx.is_ok():
 		update_mapping_list_display()
+	elif ctx.is_error():
+		ToastManager.show_toast("Failed to load mapping list data")
 
 # update mapping list item display
 func update_mapping_list_display() -> void:
@@ -253,7 +255,6 @@ func _on_create_mapping_button_pressed():
 	var screen = scene_mapping_detail_screen.instantiate() as MappingDetailScreen
 	screen.call_deferred("init_from_mapping", mapping)
 	SceneManager.change_scene_to_node(screen)
-	ToastManager.show_toast("Created new mapping")
 
 func _on_refresh_mapping_button_pressed():
 	fetch_list_mapping()
