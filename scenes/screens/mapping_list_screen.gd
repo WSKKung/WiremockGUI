@@ -254,3 +254,9 @@ func _on_create_mapping_button_pressed():
 	screen.call_deferred("init_from_mapping", mapping)
 	SceneManager.change_scene_to_node(screen)
 	ToastManager.show_toast("Created new mapping")
+
+func _on_refresh_mapping_button_pressed():
+	fetch_list_mapping()
+
+func _on_return_button_pressed():
+	SceneManager.change_scene_to_previus()

@@ -44,6 +44,10 @@ layout_mode = 2
 [node name="TitleContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
+[node name="ReturnButton" type="Button" parent="MarginContainer/VBoxContainer/TitleContainer"]
+layout_mode = 2
+text = "Return"
+
 [node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer/TitleContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -93,31 +97,50 @@ theme_override_constants/separation = 5
 [node name="MappingListItemHeader" parent="MarginContainer/VBoxContainer/ListContainer/ScrollContainer/MappingContainer" instance=ExtResource("4_0ng50")]
 layout_mode = 2
 
-[node name="PageContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PageContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("3_gwjqx")
 alignment = 1
 
-[node name="PreviousPageButton" type="Button" parent="MarginContainer/VBoxContainer/PageContainer"]
+[node name="PreviousPageButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/PageContainer"]
 layout_mode = 2
 text = "<"
 
-[node name="PageLabel" type="Label" parent="MarginContainer/VBoxContainer/PageContainer"]
+[node name="PageLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/PageContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "0 / 0 (0 from total 0)"
 horizontal_alignment = 1
 
-[node name="NextPageButton" type="Button" parent="MarginContainer/VBoxContainer/PageContainer"]
+[node name="NextPageButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/PageContainer"]
 layout_mode = 2
 text = ">"
 
-[node name="CreateMappingButton" type="Button" parent="MarginContainer/VBoxContainer/PageContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="CreateMappingButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Create"
 
+[node name="RefreshMappingButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Refresh"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/TitleContainer/ReturnButton" to="." method="_on_return_button_pressed"]
 [connection signal="text_submitted" from="MarginContainer/VBoxContainer/SearchContainer/SearchLineEdit" to="." method="_on_search_line_edit_text_submitted"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/SearchContainer/SearchButton" to="." method="_on_search_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/PageContainer/PreviousPageButton" to="." method="_on_previous_page_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/PageContainer/NextPageButton" to="." method="_on_next_page_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/PageContainer/CreateMappingButton" to="." method="_on_create_mapping_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/PageContainer/PreviousPageButton" to="." method="_on_previous_page_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/PageContainer/NextPageButton" to="." method="_on_next_page_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/CreateMappingButton" to="." method="_on_create_mapping_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/RefreshMappingButton" to="." method="_on_refresh_mapping_button_pressed"]
