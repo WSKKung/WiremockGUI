@@ -1,4 +1,16 @@
-[gd_resource type="Theme" format=3 uid="uid://duj3xsv2vc43h"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://duj3xsv2vc43h"]
+
+[sub_resource type="Gradient" id="Gradient_4wn61"]
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.304029, 0.838828, 1)
+colors = PackedColorArray(0.304, 0.461067, 0.8, 1, 0.262745, 0.701961, 0.937255, 1, 0.627408, 0.678946, 0.67856, 1, 0.964706, 0.576471, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_n21qb"]
+gradient = SubResource("Gradient_4wn61")
+fill_to = Vector2(1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mj2uw"]
+texture = SubResource("GradientTexture2D_n21qb")
 
 [resource]
 HBoxContainer/constants/separation = 20
@@ -6,4 +18,5 @@ MarginContainer/constants/margin_bottom = 20
 MarginContainer/constants/margin_left = 20
 MarginContainer/constants/margin_right = 20
 MarginContainer/constants/margin_top = 20
+Panel/styles/panel = SubResource("StyleBoxTexture_mj2uw")
 VBoxContainer/constants/separation = 20
