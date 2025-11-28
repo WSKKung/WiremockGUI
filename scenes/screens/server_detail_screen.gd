@@ -3,6 +3,7 @@ extends Control
 
 @onready var name_edit: LineEdit = %NameEdit
 @onready var url_edit: LineEdit = %URLEdit
+@onready var save_button: Button = %SaveButton
 
 var server_id: String
 
@@ -27,6 +28,7 @@ func _on_return_button_pressed():
 	SceneManager.change_scene_to_previus()
 
 func _on_save_button_pressed():
+	save_button.disabled = true
 	var ctx = Context.new()
 	var server = MockServer.new()
 	server.id = server_id
@@ -41,3 +43,5 @@ func _on_save_button_pressed():
 		ToastManager.show_toast("Saved mock server " + server.name)
 	elif ctx.is_error():
 		ToastManager.show_toast("Failed to save mock server " + server.name)
+
+	save_button.disabled = false
