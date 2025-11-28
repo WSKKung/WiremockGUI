@@ -76,6 +76,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="SearchButton" type="Button" parent="MarginContainer/VBoxContainer/SearchContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Search"
 
@@ -111,6 +112,7 @@ theme = ExtResource("3_gwjqx")
 alignment = 1
 
 [node name="PreviousPageButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/PageContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "<"
 
@@ -121,6 +123,7 @@ text = "0 / 0 (0 from total 0)"
 horizontal_alignment = 1
 
 [node name="NextPageButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/PageContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = ">"
 
@@ -130,10 +133,12 @@ size_flags_horizontal = 3
 alignment = 2
 
 [node name="CreateMappingButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Create"
 
 [node name="RefreshMappingButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Refresh"
 

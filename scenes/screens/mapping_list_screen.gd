@@ -9,6 +9,13 @@ var scene_mapping_detail_screen = preload("res://scenes/screens/mapping_detail_s
 @onready var mapping_container: Container = %MappingContainer
 @onready var search_line_edit: LineEdit = %SearchLineEdit
 @onready var page_label: Label = %PageLabel
+@onready var previous_page_button: Button = %PreviousPageButton
+@onready var next_page_button: Button = %NextPageButton
+@onready var create_button: Button = %CreateMappingButton
+@onready var refresh_button: Button = %RefreshMappingButton
+@onready var search_button: Button = %SearchButton
+
+var loading: bool = false
 
 var page: int = 0
 var page_item: int = 0
@@ -22,13 +29,29 @@ func _ready():
 
 ## screen actions
 
+func set_loading(v: bool) -> void:
+	loading = v
+	previous_page_button.disabled = loading
+	next_page_button.disabled = loading
+	create_button.disabled = loading
+	refresh_button.disabled = loading
+	search_button.disabled = loading
+	search_line_edit.editable = not loading
+
 # fetch mapping list data from mock server
 func fetch_list_mapping() -> void:
+	if loading: return
+	set_loading(true)
+	
 	var ctx = Context.new()
 	list_mapping_response = await WiremockClient.list_mapping(ctx)
 	if ctx.is_ok():
 		update_mapping_list_display()
+	elif ctx.is_error():
+		ToastManager.show_toast("Failed to load mapping list data")
 
+	set_loading(false)
+	
 # update mapping list item display
 func update_mapping_list_display() -> void:
 	var mappings = get_mapping_list()
@@ -167,22 +190,27 @@ func set_total_item(new_total_item: int) -> void:
 ## signal receivers
 
 func _on_search_line_edit_text_submitted(new_text: String) -> void:
+	if loading: return
 	set_page(0)
 	update_mapping_list_display()
 
 func _on_search_button_pressed() -> void:
+	if loading: return
 	set_page(0)
 	update_mapping_list_display()
 
 func _on_previous_page_button_pressed():
+	if loading: return
 	set_page(get_page() - 1)
 	update_mapping_list_display()
 
 func _on_next_page_button_pressed():
+	if loading: return
 	set_page(get_page() + 1)
 	update_mapping_list_display()
 
 func _on_mapping_list_item_edit_requested(mapping_id: String):
+	if loading: return
 	var mapping = get_mapping_by_id(mapping_id)
 	if mapping == null:
 		return
@@ -191,6 +219,7 @@ func _on_mapping_list_item_edit_requested(mapping_id: String):
 	SceneManager.change_scene_to_node(screen)
 
 func _on_mapping_list_item_clone_requested(mapping_id: String):
+	if loading: return
 	var mapping = get_mapping_by_id(mapping_id)
 	if mapping == null:
 		return
@@ -205,6 +234,7 @@ func _on_mapping_list_item_clone_requested(mapping_id: String):
 var delete_mapping_confirm_dialog: ConfirmationDialog = null
 
 func _on_mapping_list_item_remove_requested(mapping_id: String):
+	if loading: return
 	if delete_mapping_confirm_dialog != null:
 		return
 	var mapping = get_mapping_by_id(mapping_id)
@@ -238,6 +268,7 @@ func _on_mapping_list_item_remove_requested(mapping_id: String):
 	delete_mapping_confirm_dialog.visible = true
 	
 func _on_create_mapping_button_pressed():
+	if loading: return
 	var mapping = Mapping.new()
 	mapping.id = ""
 	mapping.name = "New Mapping"
@@ -253,9 +284,9 @@ func _on_create_mapping_button_pressed():
 	var screen = scene_mapping_detail_screen.instantiate() as MappingDetailScreen
 	screen.call_deferred("init_from_mapping", mapping)
 	SceneManager.change_scene_to_node(screen)
-	ToastManager.show_toast("Created new mapping")
 
 func _on_refresh_mapping_button_pressed():
+	if loading: return
 	fetch_list_mapping()
 
 func _on_return_button_pressed():

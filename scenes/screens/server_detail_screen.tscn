@@ -62,6 +62,7 @@ size_flags_horizontal = 3
 theme_override_styles/separator = SubResource("StyleBoxLine_bk1pm")
 
 [node name="SaveButton" type="Button" parent="MarginContainer/VBoxContainer/TitleContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Save"
 

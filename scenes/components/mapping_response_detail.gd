@@ -22,6 +22,8 @@ const BODY_TYPE_TEXT = 0
 const BODY_TYPE_JSON = 1
 const BODY_TYPE_BASE64 = 2
 
+var loading: bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	reset()
@@ -65,6 +67,15 @@ func set_body_type(v: int) -> void:
 	body_type_option.select(v)
 	format_body_button.disabled = v != BODY_TYPE_JSON
 
+func set_loading(v: bool) -> void:
+	loading = v
+	status_edit.editable = not loading
+	body_edit.editable = not loading
+	format_body_button.disabled = loading or is_body_unformattable()
+	delay_edit.editable = not loading
+	proxy_base_url_edit.editable = not loading
+	proxy_trim_prefix_edit.editable = not loading
+
 ## getters
 
 func get_mapping_body_type() -> int:
@@ -89,10 +100,13 @@ func get_mapping_response_data() -> Mapping.Response:
 	out.fixed_delay_milliseconds = int(delay_edit.value)
 	return out
 
+func is_body_unformattable() -> bool:
+	return body_type_option.get_selected_id() != BODY_TYPE_JSON
+
 ## signal receivers
 
 func _on_body_type_option_item_selected(index: int):
-	format_body_button.disabled = index != BODY_TYPE_JSON
+	format_body_button.disabled = is_body_unformattable()
 	body_error_label.text = ""
 
 func _on_fomat_body_button_pressed():

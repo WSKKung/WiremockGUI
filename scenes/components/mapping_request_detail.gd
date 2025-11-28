@@ -9,6 +9,8 @@ signal mapping_name_updated(new_name: String)
 @onready var path_match_type_option: OptionButton = %PathMatchTypeOption
 @onready var path_edit: LineEdit = %PathEdit
 
+var loading: bool = false
+
 const PATH_MATCH_URL = 0
 const PATH_MATCH_URL_PATH = 1
 const PATH_MATCH_URL_PATTERN = 2
@@ -49,6 +51,14 @@ func reset() -> void:
 	method_option.select(0)
 	path_match_type_option.select(PATH_MATCH_URL)
 	path_edit.text = ""
+
+func set_loading(v: bool) -> void:
+	loading = v
+	name_edit.editable = not loading
+	priority_edit.editable = not loading
+	method_option.disabled = loading
+	path_match_type_option.disabled = loading
+	path_edit.editable = not loading
 
 ## getter
 
