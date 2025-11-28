@@ -12,6 +12,9 @@ func _ready():
 	http_request = HTTPRequest.new()
 	add_child(http_request)
 
+func set_base_url(url: String) -> void:
+	base_url = url
+
 # generic function for sending http request with default JSON request body and response body
 func _http_do(ctx: Context, method: HTTPClient.Method, url: String, body: String) -> Variant:
 	print("do request: " + url, ", body: ", body)
